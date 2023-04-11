@@ -1,0 +1,25 @@
+version: "3.1"
+
+stories:
+
+- story: music guess sad path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_mood_and_ask_performer
+  - intent: performer
+  - action: action_recommend_music
+
+- story: music guess happy path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_great
+  - action: utter_mood_and_ask_performer
+  - intent: inform_performer
+    entities:
+    - performer
+  - slot_was_set:
+    - performer: performer
+  - action: action_recommend_music

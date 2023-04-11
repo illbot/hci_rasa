@@ -1,0 +1,49 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - mood_great
+  - mood_unhappy
+  - bot_challenge
+  - inform_performer
+  - performer
+
+
+actions:
+  - action_recommend_music
+
+slots:
+  - performer:
+    type: text
+
+responses:
+  utter_greet:
+  - text: "Hey, I am a music guessing bot, how are you today?"
+  - text: "Hey, how are you?"
+  - text: "Hey, hope you are feeling fine."
+
+  utter_cheer_up:
+  - text: "Here is something to cheer you up:"
+    image: "https://i.imgur.com/nGF1K8f.jpg"
+
+  utter_did_that_help:
+  - text: "Did that help you?"
+
+  utter_happy:
+  - text: "Great, carry on!"
+
+  utter_goodbye:
+  - text: "Bye"
+
+  utter_iamabot:
+  - text: "I am a bot, powered by Rasa."
+
+  utter_mood_and_ask_performer:
+  - text: "Interesting... You have a favourite performer?"
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
