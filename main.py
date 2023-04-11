@@ -129,7 +129,7 @@ class SongData:
 
 if __name__ == '__main__':
     # acousticness,danceability,duration_ms,energy,instrumentalness,key,liveness,loudness,mode,speechiness,tempo,time_signature,valence,target,song_title,artist
-    df = pd.read_csv(r'C:\Users\User\PycharmProjects\pythonProject\data.csv')
+    df = pd.read_csv(r'.\data.csv')
     sd = SongData(df)
     result = sd.acousticness(0.2, 0.8).danceability(0.2, 0.8).energy(0.2, 0.8).instrumentalness(0.2, 0.8).liveness(0.2, 0.8).speechiness(0.05, 0.1).valence(0.1, 0.6).dataFrame
     print(pd.DataFrame(result, columns=['valence', 'song_title', 'artist']))
