@@ -1,0 +1,23 @@
+danceability : It describes whether a track is suitable to dance based on musical elements.
+
+The value 0.0 means that the track is least danceable. Songs with values 1.0 are the best for dancing.
+
+duration_ms : It represents a duration of the track in milliseconds.
+
+energy : It is a measure of energy which varies from 0.0 to 1.0. Energy shows a measure of intensity and activity. Typically, energetic tracks feel fast, loud, and noisy. For example, death metal has high energy, while a Bach prelude scores low on the scale.
+
+instrumentalness :It describes whethed a track has a vocal. In this context vocal sounds are trated as instrumental. The highest value takes songs with Rap or spoken words.
+
+key : This is an estimated key of the track. Integer values are mapped to the pitches of Pitch class notation. In case lack of key, the song takes value equal to -1.
+
+liveness : It measures the presence of audience in the recorded song. The higher value increases probability that the track was played live. loudness : The means loudness of a track estimated in decibels (dB).
+
+mode : It represents the modality of the voice. This value is scaled in range (0,1). Songs with value closer to 1, have Major melodic.
+
+speechiness : The score of present spoken words in a track. Speech recordings are scored close to 1.0 value. Values in range (0,33 and 0,66) represent songs which may contain speech and music. The values below 0,33 threshold are represented by music and tracks without speech.
+
+tempo : The average tempo of a track expressed in beats per minute (BPM).
+
+time_signature: Mean signature of a track. This measure specifies number of beats in each bar.
+
+valence : represents the musical positiveness provided by a track.
