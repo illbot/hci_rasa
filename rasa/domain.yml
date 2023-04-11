@@ -15,9 +15,16 @@ intents:
 actions:
   - action_recommend_music
 
+entities:
+  - performer
+
 slots:
-  - performer:
+  performer:
     type: text
+    mappings:
+    - intent: inform_performer
+      type: from_entity
+      entity: performer
 
 responses:
   utter_greet:
