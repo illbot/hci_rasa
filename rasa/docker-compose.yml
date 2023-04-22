@@ -1,0 +1,22 @@
+version: '3.0'
+services:
+  frontend:
+    image: nginx:alpine
+    volumes:
+      - ./frontend/index.html:/usr/share/nginx/html/index.html
+    ports:
+      - 80:80
+  rasa:
+    image: rasa/rasa:3.5.5-full
+    ports:
+      - 5005:5005
+    volumes:
+      - ./:/app
+    command: >
+        run 
+        --enable-api
+        --cors "*"
+  app:
+    image: illesbotond/personal:rasa_action_server
+    expose:
+    - 5055
