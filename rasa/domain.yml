@@ -14,9 +14,11 @@ intents:
 
 actions:
   - action_recommend_music
+  - action_read_csv
 
 entities:
   - performer
+  - csv_data
 
 slots:
   performer:
@@ -25,6 +27,13 @@ slots:
     - intent: inform_performer
       type: from_entity
       entity: performer
+
+  csv_data:
+    type: text
+    mappings:
+    - intent: greet
+      type: from_entity
+      entity: csv_data
 
 responses:
   utter_greet:

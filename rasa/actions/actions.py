@@ -4,26 +4,30 @@
 # See this guide on how to implement these action:
 # https://rasa.com/docs/rasa/custom-actions
 
-
-# This is a simple example for a custom action which utters "Hello World!"
-
 from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
-#
-#
-# class ActionHelloWorld(Action):
-#
-#     def name(self) -> Text:
-#         return "action_hello_world"
-#
-#     def run(self, dispatcher: CollectingDispatcher,
-#             tracker: Tracker,
-#             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-#
-#         dispatcher.utter_message(text="Hello World!")
-#
-#         return []
+from rasa_sdk.events import SlotSet
+
+class ReadCSV(Action):
+    def name(self) -> Text:
+        return "action_read_csv"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        
+        #with open('data.csv', 'r') as file:
+        #    csv_content = csv.reader(file)
+        #    data = []
+        #    for row in csv_content:
+        #        data.append(row)
+        
+        # Set a slot with the data
+        dispatcher.utter_message("Hi there, I am a music quessing bot!")
+        return [SlotSet("csv_data", "Lefutott")]
+
+
 class RecommendMusic(Action):
     def name(self) -> Text:
         return "action_recommend_music"
@@ -34,6 +38,9 @@ class RecommendMusic(Action):
         
         #Get the user's mood from the "mood" entity
         performer = tracker.get_slot("performer")
+        csv_data = tracker.get_slot("csv_data")
+        dispatcher.utter_message("CSV_DATA: "+csv_data)
+
         # Your custom code to recommend music here, based on the mood
         if performer:
             # Respond to the user with the recommendation
