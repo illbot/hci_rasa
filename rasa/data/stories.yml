@@ -2,24 +2,176 @@ version: "3.1"
 
 stories:
 
-#- story: music guess sad path
-#  steps:
-#  - intent: greet
-#  - action: utter_greet
-#  - intent: mood_unhappy
-#  - action: utter_mood_and_ask_performer
-#  - intent: performer
-#  - action: action_recommend_music
-
-- story: music guess path
+- story: yyy path
   steps:
   - intent: greet
-  - action: action_read_csv
-  - intent: mood_great
-  - action: utter_mood_and_ask_performer
-  - intent: inform_performer
-    entities:
-    - performer
-  - slot_was_set:
-    - performer: performer
-  - action: action_recommend_music
+  - action: utter_greet
+  - action: utter_ask_day
+  - intent: good_day_response
+  - action: action_good_day
+  - action: utter_ask_celebrate
+  - intent: affirm
+  - action: action_celebrate_y
+  - action: utter_ask_dance
+  - intent: affirm
+  - action: action_dance_y
+  - action: utter_ask_sing
+  - intent: affirm
+  - action: action_sing_y
+  - action: action_suggest_song
+
+- story: yyn path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_ask_day
+  - intent: good_day_response
+  - action: action_good_day
+  - action: utter_ask_celebrate
+  - intent: affirm
+  - action: action_celebrate_y
+  - action: utter_ask_dance
+  - intent: affirm
+  - action: action_dance_y
+  - action: utter_ask_sing
+  - intent: deny
+  - action: action_sing_n
+  - action: action_suggest_song
+
+- story: yny path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_ask_day
+  - intent: good_day_response
+  - action: action_good_day
+  - action: utter_ask_celebrate
+  - intent: affirm
+  - action: action_celebrate_y
+  - action: utter_ask_dance
+  - intent: deny
+  - action: action_dance_n
+  - action: utter_ask_sing
+  - intent: affirm
+  - action: action_sing_y
+  - action: action_suggest_song
+
+- story: ynn path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_ask_day
+  - intent: good_day_response
+  - action: action_good_day
+  - action: utter_ask_celebrate
+  - intent: affirm
+  - action: action_celebrate_y
+  - action: utter_ask_dance
+  - intent: deny
+  - action: action_dance_n
+  - action: utter_ask_sing
+  - intent: deny
+  - action: action_sing_n
+  - action: action_suggest_song
+
+- story: nyy path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_ask_day
+  - intent: good_day_response
+  - action: action_good_day
+  - action: utter_ask_celebrate
+  - intent: deny
+  - action: action_celebrate_n
+  - action: utter_ask_dance
+  - intent: affirm
+  - action: action_dance_y
+  - action: utter_ask_sing
+  - intent: affirm
+  - action: action_sing_y
+  - action: action_suggest_song
+
+- story: nyn path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_ask_day
+  - intent: good_day_response
+  - action: action_good_day
+  - action: utter_ask_celebrate
+  - intent: deny
+  - action: action_celebrate_n
+  - action: utter_ask_dance
+  - intent: affirm
+  - action: action_dance_y
+  - action: utter_ask_sing
+  - intent: deny
+  - action: action_sing_n
+  - action: action_suggest_song
+
+- story: nny path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_ask_day
+  - intent: good_day_response
+  - action: action_good_day
+  - action: utter_ask_celebrate
+  - intent: deny
+  - action: action_celebrate_n
+  - action: utter_ask_dance
+  - intent: deny
+  - action: action_dance_n
+  - action: utter_ask_sing
+  - intent: affirm
+  - action: action_sing_y
+  - action: action_suggest_song
+
+- story: nnn path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_ask_day
+  - intent: good_day_response
+  - action: action_good_day
+  - action: utter_ask_celebrate
+  - intent: deny
+  - action: action_celebrate_n
+  - action: utter_ask_dance
+  - intent: deny
+  - action: action_dance_n
+  - action: utter_ask_sing
+  - intent: deny
+  - action: action_sing_n
+  - action: action_suggest_song
+
+- story: bad day y path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_ask_day
+  - intent: bad_day_response
+  - action: action_bad_day
+  - action: utter_ask_cheer_up
+  - intent: affirm
+  - action: action_cheer_up_y
+  - action: utter_ask_dance
+  - intent: affirm
+  - action: action_dance_y
+  - action: utter_ask_sing
+  - intent: affirm
+  - action: action_sing_y
+  - action: action_suggest_song
+
+- story: bad day n path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_ask_day
+  - intent: bad_day_response
+  - action: action_bad_day
+  - action: utter_ask_cheer_up
+  - intent: deny
+  - action: action_cheer_up_n
+  - action: action_suggest_song

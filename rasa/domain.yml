@@ -5,20 +5,48 @@ intents:
   - goodbye
   - affirm
   - deny
-  - mood_great
-  - mood_unhappy
   - bot_challenge
   - inform_performer
   - performer
-
+  - good_day_response
+  - bad_day_response
 
 actions:
   - action_recommend_music
   - action_read_csv
+  - action_bad_mood
+  - action_good_mood
+  - action_good_day
+  - action_bad_day
+  - action_celebrate_y
+  - action_celebrate_n
+  - action_dance_y
+  - action_dance_n
+  - action_sing_y
+  - action_sing_n
+  - action_cheer_up_y
+  - action_cheer_up_n
+  - action_suggest_song
 
 entities:
   - performer
-  - csv_data
+  - tempoMin
+  - tempoMax
+  - valenceMin
+  - valenceMax
+  - acousticnessMin
+  - acousticnessMax
+  - danceabilityMin
+  - danceabilityMax
+  - energyMin
+  - energyMax
+  - instrumentalnessMin
+  - instrumentalnessMax
+  - livenessMin
+  - livenessMax
+  - speechinessMin
+  - speechinessMax
+  - changeAmount
 
 slots:
   performer:
@@ -28,18 +56,131 @@ slots:
       type: from_entity
       entity: performer
 
-  csv_data:
-    type: text
+  tempoMin:
+    type: float
+    influence_conversation: false
+    initial_value: 0
     mappings:
-    - intent: greet
-      type: from_entity
-      entity: csv_data
+    - type: custom
+
+  tempoMax:
+    type: float
+    influence_conversation: false
+    initial_value: 1
+    mappings:
+      - type: custom
+
+  valenceMin:
+    type: float
+    influence_conversation: false
+    initial_value: 0
+    mappings:
+    - type: custom
+
+  valenceMax:
+    type: float
+    influence_conversation: false
+    initial_value: 1
+    mappings:
+      - type: custom
+
+  acousticnessMin:
+    type: float
+    influence_conversation: false
+    initial_value: 0
+    mappings:
+    - type: custom
+
+  acousticnessMax:
+    type: float
+    influence_conversation: false
+    initial_value: 1
+    mappings:
+      - type: custom
+
+  danceabilityMin:
+    type: float
+    influence_conversation: false
+    initial_value: 0
+    mappings:
+    - type: custom
+
+  danceabilityMax:
+    type: float
+    influence_conversation: false
+    initial_value: 1
+    mappings:
+      - type: custom
+
+  energyMin:
+    type: float
+    influence_conversation: false
+    initial_value: 0
+    mappings:
+      - type: custom
+
+  energyMax:
+    type: float
+    influence_conversation: false
+    initial_value: 1
+    mappings:
+      - type: custom
+
+  instrumentalnessMin:
+    type: float
+    influence_conversation: false
+    initial_value: 0
+    mappings:
+      - type: custom
+
+  instrumentalnessMax:
+    type: float
+    influence_conversation: false
+    initial_value: 1
+    mappings:
+      - type: custom
+
+  livenessMin:
+    type: float
+    influence_conversation: false
+    initial_value: 0
+    mappings:
+      - type: custom
+
+  livenessMax:
+    type: float
+    influence_conversation: false
+    initial_value: 1
+    mappings:
+      - type: custom
+
+  speechinessMin:
+    type: float
+    influence_conversation: false
+    initial_value: 0
+    mappings:
+      - type: custom
+
+  speechinessMax:
+    type: float
+    influence_conversation: false
+    initial_value: 1
+    mappings:
+      - type: custom
+
+  changeAmount:
+    type: float
+    influence_conversation: false
+    initial_value: 0.2
+    mappings:
+      - type: custom
 
 responses:
   utter_greet:
-  - text: "Hey, I am a music guessing bot, how are you today?"
-  - text: "Hey, how are you?"
-  - text: "Hey, hope you are feeling fine."
+  - text: "Hey!"
+  - text: "Hello!"
+  - text: "Hi!"
+  - text: "Greetings!"
 
   utter_cheer_up:
   - text: "Here is something to cheer you up:"
@@ -59,6 +200,57 @@ responses:
 
   utter_mood_and_ask_performer:
   - text: "Interesting... You have a favourite performer?"
+
+  utter_ask_day:
+  - text: "How was your day?"
+
+  utter_ask_celebrate:
+  - text: "Good to hear that, wanna celebrate?"
+
+  utter_ask_dance:
+  - text: "Do you wanna dance?"
+
+  utter_ask_sing:
+  - text: "Do you wanna sing?"
+
+  utter_ask_cheer_up:
+  - text: "Im sorry to hear that, do you want me to cheer you up?"
+
+
+
+
+  utter_dance_y:
+  - text: "yes to dancing"
+
+  utter_dance_n:
+    - text: "no to dancing"
+
+  utter_sing_y:
+    - text: "yes to singing"
+
+  utter_sing_n:
+    - text: "no to singing"
+
+  utter_celebrate_y:
+    - text: "yes to celebrate"
+
+  utter_celebrate_n:
+    - text: "no to celebrate"
+
+  utter_cheer_up_y:
+    - text: "yes to cheer up"
+
+  utter_cheer_up_n:
+    - text: "no to cheer up"
+
+  utter_good_day:
+    - text: "good day response"
+
+  utter_bad_day:
+    - text: "bad day response"
+
+  utter_suggest_song:
+    - text: "here is your song"
 
 session_config:
   session_expiration_time: 60
