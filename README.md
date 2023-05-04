@@ -28,6 +28,14 @@ Step-by step deploy guide to VM:
 - docker push
 
 in VM:
+
+// git install
+- sudo apt update
+- sudo apt install git
+
+// docker install
+- sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
 - install docker
 - git pull repo
 - docker-compuse up -d
