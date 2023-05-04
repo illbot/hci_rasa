@@ -11,8 +11,8 @@
 # https://rasa.com/docs/rasa/custom-actions
 
 action_endpoint:
-#  url: "http://app:5055/webhook" # This is used when run on docker-compose
-  url: "http://localhost:5055/webhook"
+  url: "http://app:5055/webhook" # This is used when run on docker-compose
+#  url: "http://localhost:5055/webhook"
 
 
 # Tracker store which is used to store the conversations.
