@@ -7,7 +7,7 @@ services:
     ports:
       - 80:80
   rasa:
-    build: rasa_backend/.
+    build: ./rasa_backend/.
     ports:
       - 5005:5005
     volumes:
@@ -17,6 +17,6 @@ services:
         --enable-api
         --cors "*"
   app:
-    build: /.
+    build: .
     expose:
     - 5055

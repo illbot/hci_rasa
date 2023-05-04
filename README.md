@@ -34,7 +34,8 @@ in VM:
 - sudo apt install git
 
 // docker install
-- sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+- curl -fsSL https://get.docker.com -o get-docker.sh
+- sudo sh get-docker.sh
 
 - install docker
 - git pull repo
