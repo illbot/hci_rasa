@@ -146,7 +146,7 @@ stories:
   - action: action_sing_n
   - action: action_suggest_song
 
-- story: bad day y path
+- story: bad day yyy path
   steps:
   - intent: greet
   - action: utter_greet
@@ -162,6 +162,72 @@ stories:
   - action: utter_ask_sing
   - intent: affirm
   - action: action_sing_y
+  - action: action_suggest_song
+
+- story: bad day yyn path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_ask_day
+  - intent: bad_day_response
+  - action: action_bad_day
+  - action: utter_ask_cheer_up
+  - intent: affirm
+  - action: action_cheer_up_y
+  - action: utter_ask_dance
+  - intent: affirm
+  - action: action_dance_y
+  - action: utter_ask_sing
+  - intent: deny
+  - action: action_sing_n
+  - action: action_suggest_song
+
+- story: bad day yny path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_ask_day
+  - intent: bad_day_response
+  - action: action_bad_day
+  - action: utter_ask_cheer_up
+  - intent: affirm
+  - action: action_cheer_up_y
+  - action: utter_ask_dance
+  - intent: deny
+  - action: action_dance_n
+  - action: utter_ask_sing
+  - intent: affirm
+  - action: action_sing_y
+  - action: action_suggest_song
+
+- story: bad day ynn path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_ask_day
+  - intent: bad_day_response
+  - action: action_bad_day
+  - action: utter_ask_cheer_up
+  - intent: affirm
+  - action: action_cheer_up_y
+  - action: utter_ask_dance
+  - intent: deny
+  - action: action_dance_n
+  - action: utter_ask_sing
+  - intent: deny
+  - action: action_sing_n
+  - action: action_suggest_song
+
+- story: bad day y path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_ask_day
+  - intent: bad_day_response
+  - action: action_bad_day
+  - action: utter_ask_cheer_up
+  - intent: affirm
+  - action: action_cheer_up_y
   - action: action_suggest_song
 
 - story: bad day n path

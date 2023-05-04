@@ -16,6 +16,30 @@ nlu:
     - goodmorning
     - goodevening
     - good afternoon
+    - Good morning
+    - Hi there
+    - How are you?
+    - Hey
+    - Howdy
+    - Greetings
+    - Good day
+    - What's up?
+    - Wassup
+    - Yo
+    - How's it going?
+    - Hiya
+    - Hola
+    - Aloha
+    - Howdy-do
+    - Bonjour
+    - Hi-de-ho
+    - Hey there
+    - Howdy-doody
+    - Hiya-ho
+    - Shalom
+    - Hey ya
+    - G'day
+    - Howdy-do-dah
 
 - intent: goodbye
   examples: |
@@ -40,6 +64,24 @@ nlu:
     - correct
     - sure
     - ok
+    - All right
+    - Unquestionably
+    - Positively
+    - Absolutely certain
+    - Without hesitation
+    - You bet
+    - Positive
+    - Unconditionally
+    - Most definitely
+    - Agreed
+    - No doubt
+    - Absolutely yes
+    - Indeed
+    - Without a doubt
+    - Absolutely
+    - Certainly
+    - yes i want
+    - yes i wanna
 
 - intent: deny
   examples: |
@@ -50,6 +92,31 @@ nlu:
     - don't like that
     - no way
     - not really
+    - No, not ever
+    - No, not at all
+    - Not even remotely
+    - Never in a million years
+    - Not in this lifetime
+    - Not likely
+    - That's a no-go
+    - That's a negative
+    - Not in a million years
+    - No way
+    - Absolutely not
+    - Not a chance
+    - Not even close
+    - No can do
+    - I'm afraid not
+    - Sorry, not happening
+    - Negative
+    - Not this time
+    - No thanks
+    - That's a no
+    - Not on my watch
+    - not now
+    - i don't want to
+    - i don't want
+    - i don't wanna
 
 - intent: good_day_response
   examples: |
@@ -65,6 +132,25 @@ nlu:
     - amazing
     - it was ok
     - good
+    - it was good
+    - It was energizing
+    - It was rewarding
+    - It was interesting
+    - It was memorable
+    - It was meaningful
+    - It was positive
+    - It was inspiring
+    - It was satisfying
+    - It was relaxing
+    - It was fun
+    - It was productive
+    - It was enjoyable
+    - It was excellent
+    - It was pretty good
+    - It went by quickly
+    - It was decent
+    - It was alright
+    - It was good
 
 - intent: bad_day_response
   examples: |
@@ -77,10 +163,24 @@ nlu:
     - stress
     - hard
     - sad
+    - not ok
+    - no good
     - not good
     - not very good
     - disappointed
     - horrible
+    - It was difficult
+    - It was disappointing
+    - It was chaotic
+    - It was weird
+    - It was monotonous
+    - It was hectic
+    - It was stressful
+    - It was busy
+    - not fun
+    - no fun
+    - not easy
+    - not great
 
 - intent: bot_challenge
   examples: |
