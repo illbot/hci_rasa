@@ -17,29 +17,29 @@ then start
 py -m rasa shell
 
 
-- story: happy path
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: mood_great
-  - action: utter_happy
+Step-by step deploy guide to VM:
 
-- story: sad path 1
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: mood_unhappy
-  - action: utter_cheer_up
-  - action: utter_did_that_help
-  - intent: affirm
-  - action: utter_happy
+- uncomment  endpoins.yml; url: "http://app:5055/webhook"
+- after VM DNS:
+  - frontend/index.html
+    - "<div id="rasa-chat-widget" data-websocket-url="http://{VM_DNS_NAME}:5005/socket.io"></div>"
+- git commit and push with the latest builded model under models/
+- docker build -t illesbotond/personal:rasa_action_server .
+- docker push
 
-- story: sad path 2
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: mood_unhappy
-  - action: utter_cheer_up
-  - action: utter_did_that_help
-  - intent: deny
-  - action: utter_goodbye
+in VM:
+
+// git install
+- sudo apt update
+- sudo apt install git
+
+// docker install
+- curl -fsSL https://get.docker.com -o get-docker.sh
+- sudo sh get-docker.sh
+
+- install docker
+- git pull repo
+- docker-compuse up -d
+
+VM settings:
+- open ports: 80, 5005

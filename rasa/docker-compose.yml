@@ -7,7 +7,7 @@ services:
     ports:
       - 80:80
   rasa:
-    image: rasa/rasa:3.5.5-full
+    build: ./rasa_backend/.
     ports:
       - 5005:5005
     volumes:
@@ -17,6 +17,6 @@ services:
         --enable-api
         --cors "*"
   app:
-    image: illesbotond/personal:rasa_action_server
+    build: .
     expose:
     - 5055
