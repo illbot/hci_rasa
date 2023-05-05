@@ -7,7 +7,7 @@ import sys
 from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
-from rasa_sdk.events import SlotSet
+from rasa_sdk.events import SlotSet, Restarted
 import pandas as pd
 
 
@@ -17,7 +17,10 @@ class GoodDay(Action):
 
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        return [SlotSet("tempoMin", tracker.get_slot("tempoMin") + tracker.get_slot("changeAmount"))]
+
+        return [SlotSet("tempoMin", tracker.get_slot("tempoMin") + tracker.get_slot("changeAmount")),
+                SlotSet("energyMin", tracker.get_slot("energyMin") + tracker.get_slot("changeAmount")),
+                SlotSet("valenceMin", tracker.get_slot("valenceMin") + tracker.get_slot("changeAmount"))]
 
 
 class BadDay(Action):
@@ -26,7 +29,10 @@ class BadDay(Action):
 
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        return [SlotSet("tempoMax", tracker.get_slot("tempoMax") - tracker.get_slot("changeAmount"))]
+
+        return [SlotSet("tempoMax", tracker.get_slot("tempoMax") - tracker.get_slot("changeAmount")),
+                SlotSet("energyMax", tracker.get_slot("energyMax") - tracker.get_slot("changeAmount")),
+                SlotSet("valenceMax", tracker.get_slot("valenceMax") - tracker.get_slot("changeAmount"))]
 
 
 class CelebrateY(Action):
@@ -35,7 +41,9 @@ class CelebrateY(Action):
 
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        return [SlotSet("valenceMin", tracker.get_slot("valenceMin")+tracker.get_slot("changeAmount"))]
+
+        return [SlotSet("tempoMin", tracker.get_slot("tempoMin") + tracker.get_slot("changeAmount")),
+                SlotSet("valenceMin", tracker.get_slot("valenceMin") + tracker.get_slot("changeAmount"))]
 
 
 class CelebrateN(Action):
@@ -44,7 +52,9 @@ class CelebrateN(Action):
 
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        return [SlotSet("valenceMax", tracker.get_slot("valenceMax")-tracker.get_slot("changeAmount"))]
+
+        return [SlotSet("tempoMax", tracker.get_slot("tempoMax") - tracker.get_slot("changeAmount")),
+                SlotSet("valenceMin", tracker.get_slot("valenceMin") - tracker.get_slot("changeAmount"))]
 
 
 class DanceY(Action):
@@ -53,7 +63,8 @@ class DanceY(Action):
 
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        return [SlotSet("danceabilityMin", tracker.get_slot("danceabilityMin")+tracker.get_slot("changeAmount"))]
+
+        return [SlotSet("danceabilityMin", tracker.get_slot("danceabilityMin") + tracker.get_slot("changeAmount"))]
 
 
 class DanceN(Action):
@@ -62,7 +73,8 @@ class DanceN(Action):
 
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        return [SlotSet("danceabilityMax", tracker.get_slot("danceabilityMax")-tracker.get_slot("changeAmount"))]
+
+        return [SlotSet("danceabilityMax", tracker.get_slot("danceabilityMax") - tracker.get_slot("changeAmount"))]
 
 
 class SingY(Action):
@@ -71,7 +83,9 @@ class SingY(Action):
 
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        return [SlotSet("speechinessMin", tracker.get_slot("speechinessMin")+tracker.get_slot("changeAmount"))]
+
+        return [SlotSet("instrumentalnessMin", tracker.get_slot("instrumentalnessMin") + tracker.get_slot("changeAmount")),
+                SlotSet("acousticnessMin", tracker.get_slot("acousticnessMin") + tracker.get_slot("changeAmount"))]
 
 
 class SingN(Action):
@@ -80,7 +94,9 @@ class SingN(Action):
 
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        return [SlotSet("speechinessMax", tracker.get_slot("speechinessMax")-tracker.get_slot("changeAmount"))]
+
+        return [SlotSet("instrumentalnessMax", tracker.get_slot("instrumentalnessMax") - tracker.get_slot("changeAmount")),
+                SlotSet("acousticnessMax", tracker.get_slot("acousticnessMax") - tracker.get_slot("changeAmount"))]
 
 
 class CheerUpY(Action):
@@ -89,7 +105,8 @@ class CheerUpY(Action):
 
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        return [SlotSet("valenceMin", tracker.get_slot("valenceMin")+tracker.get_slot("changeAmount"))]
+
+        return [SlotSet("valenceMin", tracker.get_slot("valenceMin") + tracker.get_slot("changeAmount"))]
 
 
 class CheerUpN(Action):
@@ -98,7 +115,8 @@ class CheerUpN(Action):
 
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        return [SlotSet("valenceMax", tracker.get_slot("valenceMax")-tracker.get_slot("changeAmount"))]
+
+        return [SlotSet("valenceMax", tracker.get_slot("valenceMax") - tracker.get_slot("changeAmount"))]
 
 
 class SuggestSong(Action):
@@ -115,16 +133,24 @@ class SuggestSong(Action):
                     ).danceability(tracker.get_slot("danceabilityMin"), tracker.get_slot("danceabilityMax")
                     ).energy(tracker.get_slot("energyMin"), tracker.get_slot("energyMax")
                     ).instrumentalness(tracker.get_slot("instrumentalnessMin"), tracker.get_slot("instrumentalnessMax")
-                    ).liveness(tracker.get_slot("livenessMin"), tracker.get_slot("livenessMax")
-                    ).speechiness(tracker.get_slot("speechinessMin"), tracker.get_slot("speechinessMax")
                     ).valence(tracker.get_slot("valenceMin"), tracker.get_slot("valenceMax")
+                    ).acousticness(tracker.get_slot("acousticnessMin"), tracker.get_slot("acousticnessMax")
                     ).dataFrame
 
         suggested = result.sample()
-        dispatcher.utter_message(
-            "Suggested song: " + suggested.iloc[0]['song_title'] + ", by: " + suggested.iloc[0]['artist'])
+        dispatcher.utter_message(suggested.iloc[0]['song_title'] + ", by: " + suggested.iloc[0]['artist'])
 
         return []
+
+
+class Restart(Action):
+    def name(self) -> Text:
+        return "action_restart"
+
+    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        dispatcher.utter_message("Restarted!")
+        return [Restarted()]
 
 
 class SongData:

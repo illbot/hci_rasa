@@ -121,7 +121,7 @@ nlu:
 - intent: good_day_response
   examples: |
     - i got a raise
-    - it was the best
+    - the best
     - exiting
     - fine
     - lovely
@@ -130,27 +130,34 @@ nlu:
     - perfect
     - great
     - amazing
-    - it was ok
+    - ok
     - good
-    - it was good
-    - It was energizing
-    - It was rewarding
-    - It was interesting
-    - It was memorable
-    - It was meaningful
-    - It was positive
-    - It was inspiring
-    - It was satisfying
-    - It was relaxing
-    - It was fun
-    - It was productive
-    - It was enjoyable
-    - It was excellent
-    - It was pretty good
-    - It went by quickly
-    - It was decent
-    - It was alright
-    - It was good
+    - ok
+    - energizing
+    - rewarding
+    - interesting
+    - memorable
+    - meaningful
+    - positive
+    - inspiring
+    - satisfying
+    - relaxing
+    - fun
+    - productive
+    - enjoyable
+    - excellent
+    - pretty good
+    - decent
+    - alright
+    - good
+    - not bad
+    - not hard
+    - wasnt bad
+    - wasn't bad
+    - wasnt hard
+    - wasn't hard
+    - all right
+    - was ok
 
 - intent: bad_day_response
   examples: |
@@ -169,18 +176,37 @@ nlu:
     - not very good
     - disappointed
     - horrible
-    - It was difficult
-    - It was disappointing
-    - It was chaotic
-    - It was weird
-    - It was monotonous
-    - It was hectic
-    - It was stressful
-    - It was busy
+    - difficult
+    - disappointing
+    - chaotic
+    - weird
+    - monotonous
+    - hectic
+    - stressful
+    - busy
     - not fun
     - no fun
     - not easy
     - not great
+    - not good
+    - wasnt good
+    - wasn't good
+    - wasnt great
+    - wasn't great
+    - wasnt easy
+    - wasn't easy
+    - wasnt ok
+    - wasn't ok
+
+- intent: different_song
+  examples: |
+    - different song
+    - another song
+    - different music
+    - another music
+    - i dont like this
+    - change song
+    - change music
 
 - intent: bot_challenge
   examples: |
@@ -195,3 +221,9 @@ nlu:
     - My favourite performer is [Beyonce](performer)
     - [Drake](performer)
     - [Nicky Minaj](performer)
+
+- intent: restart
+  examples: |
+    - restart
+    - start over
+    - again

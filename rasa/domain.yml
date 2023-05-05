@@ -10,6 +10,7 @@ intents:
   - performer
   - good_day_response
   - bad_day_response
+  - different_song
 
 actions:
   - action_recommend_music
@@ -27,6 +28,7 @@ actions:
   - action_cheer_up_y
   - action_cheer_up_n
   - action_suggest_song
+  - action_restart
 
 entities:
   - performer
@@ -250,7 +252,10 @@ responses:
     - text: "bad day response"
 
   utter_suggest_song:
-    - text: "here is your song"
+    - text: "Here is your song:"
+
+  utter_different_song:
+    - text: "Try this song:"
 
 session_config:
   session_expiration_time: 60
