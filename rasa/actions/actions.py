@@ -129,7 +129,7 @@ class SuggestSong(Action):
 
         df = pd.read_csv('actions/data.csv')
         sd = SongData(df)
-        result = sd.acousticness(tracker.get_slot("tempoMin"), tracker.get_slot("tempoMax")
+        result = sd.tempo(tracker.get_slot("tempoMin"), tracker.get_slot("tempoMax")
                     ).danceability(tracker.get_slot("danceabilityMin"), tracker.get_slot("danceabilityMax")
                     ).energy(tracker.get_slot("energyMin"), tracker.get_slot("energyMax")
                     ).instrumentalness(tracker.get_slot("instrumentalnessMin"), tracker.get_slot("instrumentalnessMax")
