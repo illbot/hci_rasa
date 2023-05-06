@@ -106,7 +106,8 @@ class CheerUpY(Action):
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        return [SlotSet("valenceMin", tracker.get_slot("valenceMin") + tracker.get_slot("changeAmount"))]
+        return [SlotSet("tempoMin", tracker.get_slot("tempoMin") + tracker.get_slot("changeAmount")),
+                SlotSet("valenceMin", tracker.get_slot("valenceMin") + tracker.get_slot("changeAmount"))]
 
 
 class CheerUpN(Action):
@@ -116,7 +117,8 @@ class CheerUpN(Action):
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        return [SlotSet("valenceMax", tracker.get_slot("valenceMax") - tracker.get_slot("changeAmount"))]
+        return [SlotSet("tempoMax", tracker.get_slot("tempoMax") - tracker.get_slot("changeAmount")),
+                SlotSet("valenceMax", tracker.get_slot("valenceMax") - tracker.get_slot("changeAmount"))]
 
 
 class SuggestSong(Action):
