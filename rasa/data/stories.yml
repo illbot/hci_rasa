@@ -260,9 +260,3 @@ stories:
   steps:
   - intent: restart
   - action: action_restart
-
-- story: different_song
-  steps:
-  - intent: different_song
-  - action: utter_different_song
-  - action: action_suggest_song
