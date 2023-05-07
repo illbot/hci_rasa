@@ -134,6 +134,7 @@ class SuggestSong(Action):
                     ).dataFrame
 
         suggested = result.sample()
+
         dispatcher.utter_message(suggested.iloc[0]['song_title'] + ", by: " + suggested.iloc[0]['artist'])
 
         return []
