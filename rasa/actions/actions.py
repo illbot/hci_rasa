@@ -19,8 +19,7 @@ class GoodDay(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
         return [SlotSet("tempoMin", tracker.get_slot("tempoMin") + tracker.get_slot("changeAmount")),
-                SlotSet("energyMin", tracker.get_slot("energyMin") + tracker.get_slot("changeAmount")),
-                SlotSet("valenceMin", tracker.get_slot("valenceMin") + tracker.get_slot("changeAmount"))]
+                SlotSet("energyMin", tracker.get_slot("energyMin") + tracker.get_slot("changeAmount"))]
 
 
 class BadDay(Action):
@@ -31,8 +30,7 @@ class BadDay(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
         return [SlotSet("tempoMax", tracker.get_slot("tempoMax") - tracker.get_slot("changeAmount")),
-                SlotSet("energyMax", tracker.get_slot("energyMax") - tracker.get_slot("changeAmount")),
-                SlotSet("valenceMax", tracker.get_slot("valenceMax") - tracker.get_slot("changeAmount"))]
+                SlotSet("energyMax", tracker.get_slot("energyMax") - tracker.get_slot("changeAmount"))]
 
 
 class CelebrateY(Action):
@@ -42,8 +40,7 @@ class CelebrateY(Action):
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        return [SlotSet("tempoMin", tracker.get_slot("tempoMin") + tracker.get_slot("changeAmount")),
-                SlotSet("valenceMin", tracker.get_slot("valenceMin") + tracker.get_slot("changeAmount"))]
+        return [SlotSet("valenceMin", tracker.get_slot("valenceMin") + tracker.get_slot("changeAmount"))]
 
 
 class CelebrateN(Action):
@@ -53,8 +50,7 @@ class CelebrateN(Action):
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        return [SlotSet("tempoMax", tracker.get_slot("tempoMax") - tracker.get_slot("changeAmount")),
-                SlotSet("valenceMin", tracker.get_slot("valenceMin") - tracker.get_slot("changeAmount"))]
+        return [SlotSet("valenceMin", tracker.get_slot("valenceMin") - tracker.get_slot("changeAmount"))]
 
 
 class DanceY(Action):
@@ -106,8 +102,7 @@ class CheerUpY(Action):
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        return [SlotSet("tempoMin", tracker.get_slot("tempoMin") + tracker.get_slot("changeAmount")),
-                SlotSet("valenceMin", tracker.get_slot("valenceMin") + tracker.get_slot("changeAmount"))]
+        return [SlotSet("valenceMin", tracker.get_slot("valenceMin") + tracker.get_slot("changeAmount"))]
 
 
 class CheerUpN(Action):
@@ -117,8 +112,7 @@ class CheerUpN(Action):
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        return [SlotSet("tempoMax", tracker.get_slot("tempoMax") - tracker.get_slot("changeAmount")),
-                SlotSet("valenceMax", tracker.get_slot("valenceMax") - tracker.get_slot("changeAmount"))]
+        return [SlotSet("valenceMax", tracker.get_slot("valenceMax") - tracker.get_slot("changeAmount"))]
 
 
 class SuggestSong(Action):
@@ -132,11 +126,11 @@ class SuggestSong(Action):
         df = pd.read_csv('actions/data.csv')
         sd = SongData(df)
         result = sd.tempo(tracker.get_slot("tempoMin"), tracker.get_slot("tempoMax")
-                    ).danceability(tracker.get_slot("danceabilityMin"), tracker.get_slot("danceabilityMax")
                     ).energy(tracker.get_slot("energyMin"), tracker.get_slot("energyMax")
-                    ).instrumentalness(tracker.get_slot("instrumentalnessMin"), tracker.get_slot("instrumentalnessMax")
                     ).valence(tracker.get_slot("valenceMin"), tracker.get_slot("valenceMax")
+                    ).danceability(tracker.get_slot("danceabilityMin"), tracker.get_slot("danceabilityMax")
                     ).acousticness(tracker.get_slot("acousticnessMin"), tracker.get_slot("acousticnessMax")
+                    ).instrumentalness(tracker.get_slot("instrumentalnessMin"), tracker.get_slot("instrumentalnessMax")
                     ).dataFrame
 
         suggested = result.sample()
@@ -156,18 +150,20 @@ class Restart(Action):
 
 
 class SongData:
-    def __init__(self, dataframe):
-        self.dataFrame = dataframe
+    def __init__(self, dataFrame):
+        self.dataFrame = dataFrame
 
     def acousticness(self, minAcousticness, maxAcousticness):
-        if minAcousticness <= self.dataFrame['acousticness'].min():
-            minAcousticness = self.dataFrame['acousticness'].min()
-        if maxAcousticness >= self.dataFrame['acousticness'].max():
-            maxAcousticness = self.dataFrame['acousticness'].max()
-        if minAcousticness >= self.dataFrame['acousticness'].max():
-            minAcousticness = self.dataFrame['acousticness'].max()
-        if maxAcousticness <= self.dataFrame['acousticness'].min():
-            maxAcousticness = self.dataFrame['acousticness'].min()
+        minData = self.dataFrame['acousticness'].min()
+        maxData = self.dataFrame['acousticness'].max()
+        if minAcousticness <= minData:
+            minAcousticness = minData
+        if maxAcousticness >= maxData:
+            maxAcousticness = maxData
+        if minAcousticness >= maxData:
+            minAcousticness = maxData
+        if maxAcousticness <= minData:
+            maxAcousticness = minData
         if minAcousticness > maxAcousticness:
             temp = minAcousticness
             minAcousticness = maxAcousticness
@@ -178,14 +174,16 @@ class SongData:
                             (self.dataFrame['acousticness'] >= minAcousticness)])
 
     def danceability(self, minDanceability, maxDanceability):
-        if minDanceability <= self.dataFrame['danceability'].min():
-            minDanceability = self.dataFrame['danceability'].min()
-        if maxDanceability >= self.dataFrame['danceability'].max():
-            maxDanceability = self.dataFrame['danceability'].max()
-        if minDanceability >= self.dataFrame['danceability'].max():
-            minDanceability = self.dataFrame['danceability'].max()
-        if maxDanceability <= self.dataFrame['danceability'].min():
-            maxDanceability = self.dataFrame['danceability'].min()
+        minData = self.dataFrame['danceability'].min()
+        maxData = self.dataFrame['danceability'].max()
+        if minDanceability <= minData:
+            minDanceability = minData
+        if maxDanceability >= maxData:
+            maxDanceability = maxData
+        if minDanceability >= maxData:
+            minDanceability = maxData
+        if maxDanceability <= minData:
+            maxDanceability = minData
         if minDanceability > maxDanceability:
             temp = minDanceability
             minDanceability = maxDanceability
@@ -196,14 +194,16 @@ class SongData:
                             (self.dataFrame['danceability'] >= minDanceability)])
 
     def energy(self, minEnergy, maxEnergy):
-        if minEnergy <= self.dataFrame['energy'].min():
-            minEnergy = self.dataFrame['energy'].min()
-        if maxEnergy >= self.dataFrame['energy'].max():
-            maxEnergy = self.dataFrame['energy'].max()
-        if minEnergy >= self.dataFrame['energy'].max():
-            minEnergy = self.dataFrame['energy'].max()
-        if maxEnergy <= self.dataFrame['energy'].min():
-            maxEnergy = self.dataFrame['energy'].min()
+        minData = self.dataFrame['energy'].min()
+        maxData = self.dataFrame['energy'].max()
+        if minEnergy <= minData:
+            minEnergy = minData
+        if maxEnergy >= maxData:
+            maxEnergy = maxData
+        if minEnergy >= maxData:
+            minEnergy = maxData
+        if maxEnergy <= minData:
+            maxEnergy = minData
         if minEnergy > maxEnergy:
             temp = minEnergy
             minEnergy = maxEnergy
@@ -213,14 +213,16 @@ class SongData:
                             (self.dataFrame['energy'] >= minEnergy)])
 
     def instrumentalness(self, minInstrumentalness, maxInstrumentalness):
-        if minInstrumentalness <= self.dataFrame['instrumentalness'].min():
-            minInstrumentalness = self.dataFrame['instrumentalness'].min()
-        if maxInstrumentalness >= self.dataFrame['instrumentalness'].max():
-            maxInstrumentalness = self.dataFrame['instrumentalness'].max()
-        if minInstrumentalness >= self.dataFrame['instrumentalness'].max():
-            minInstrumentalness = self.dataFrame['instrumentalness'].max()
-        if maxInstrumentalness <= self.dataFrame['instrumentalness'].min():
-            maxInstrumentalness = self.dataFrame['instrumentalness'].min()
+        minData = self.dataFrame['instrumentalness'].min()
+        maxData = self.dataFrame['instrumentalness'].max()
+        if minInstrumentalness <= minData:
+            minInstrumentalness = minData
+        if maxInstrumentalness >= maxData:
+            maxInstrumentalness = maxData
+        if minInstrumentalness >= maxData:
+            minInstrumentalness = maxData
+        if maxInstrumentalness <= minData:
+            maxInstrumentalness = minData
         if minInstrumentalness > maxInstrumentalness:
             temp = minInstrumentalness
             minInstrumentalness = maxInstrumentalness
@@ -229,66 +231,20 @@ class SongData:
                             (self.dataFrame['instrumentalness'] <= maxInstrumentalness) &
                             (self.dataFrame['instrumentalness'] >= minInstrumentalness)])
 
-    def liveness(self, minLiveness, maxLiveness):
-        if minLiveness <= self.dataFrame['liveness'].min():
-            minLiveness = self.dataFrame['liveness'].min()
-        if maxLiveness >= self.dataFrame['liveness'].max():
-            maxLiveness = self.dataFrame['liveness'].max()
-        if minLiveness >= self.dataFrame['liveness'].max():
-            minLiveness = self.dataFrame['liveness'].max()
-        if maxLiveness <= self.dataFrame['liveness'].min():
-            maxLiveness = self.dataFrame['liveness'].min()
-        if minLiveness > maxLiveness:
-            temp = minLiveness
-            minLiveness = maxLiveness
-            maxLiveness = temp
-        return SongData(self.dataFrame[
-                            (self.dataFrame['liveness'] <= maxLiveness) &
-                            (self.dataFrame['liveness'] >= minLiveness)])
 
-    def speechiness(self, minSpeechiness, maxSpeechiness):
-        if minSpeechiness <= self.dataFrame['speechiness'].min():
-            minSpeechiness = self.dataFrame['speechiness'].min()
-        if maxSpeechiness >= self.dataFrame['speechiness'].max():
-            maxSpeechiness = self.dataFrame['speechiness'].max()
-        if minSpeechiness >= self.dataFrame['speechiness'].max():
-            minSpeechiness = self.dataFrame['speechiness'].max()
-        if maxSpeechiness <= self.dataFrame['speechiness'].min():
-            maxSpeechiness = self.dataFrame['speechiness'].min()
-        if minSpeechiness > maxSpeechiness:
-            temp = minSpeechiness
-            minSpeechiness = maxSpeechiness
-            maxSpeechiness = temp
-        return SongData(self.dataFrame[
-                            (self.dataFrame['speechiness'] <= maxSpeechiness) &
-                            (self.dataFrame['speechiness'] >= minSpeechiness)])
-
-    def valence(self, minValence, maxValence):
-        if minValence <= self.dataFrame['valence'].min():
-            minValence = self.dataFrame['valence'].min()
-        if maxValence >= self.dataFrame['valence'].max():
-            maxValence = self.dataFrame['valence'].max()
-        if minValence >= self.dataFrame['valence'].max():
-            minValence = self.dataFrame['valence'].max()
-        if maxValence <= self.dataFrame['valence'].min():
-            maxValence = self.dataFrame['valence'].min()
-        if minValence > maxValence:
-            temp = minValence
-            minValence = maxValence
-            maxValence = temp
-        return SongData(self.dataFrame[
-                            (self.dataFrame['valence'] <= maxValence) &
-                            (self.dataFrame['valence'] >= minValence)])
-
-    def tempo(self, minTempo, maxTempo):
-        if minTempo <= self.dataFrame['tempo'].min():
-            minTempo = self.dataFrame['tempo'].min()
-        if maxTempo >= self.dataFrame['tempo'].max():
-            maxTempo = self.dataFrame['tempo'].max()
-        if minTempo >= self.dataFrame['tempo'].max():
-            minTempo = self.dataFrame['tempo'].max()
-        if maxTempo <= self.dataFrame['tempo'].min():
-            maxTempo = self.dataFrame['tempo'].min()
+    def tempo(self, minTempoPercent, maxTempoPercent):
+        minData = self.dataFrame['tempo'].min()
+        maxData = self.dataFrame['tempo'].max()
+        minTempo = minData + (maxData-minData)*minTempoPercent
+        maxTempo = minData + (maxData - minData) * maxTempoPercent
+        if minTempo <= minData:
+            minTempo = minData
+        if maxTempo >= maxData:
+            maxTempo = maxData
+        if minTempo >= maxData:
+            minTempo = maxData
+        if maxTempo <= minData:
+            maxTempo = minData
         if minTempo > maxTempo:
             temp = minTempo
             minTempo = maxTempo
@@ -296,3 +252,22 @@ class SongData:
         return SongData(self.dataFrame[
                             (self.dataFrame['tempo'] <= maxTempo) &
                             (self.dataFrame['tempo'] >= minTempo)])
+
+    def valence(self, minValence, maxValence):
+        minData = self.dataFrame['valence'].min()
+        maxData = self.dataFrame['valence'].max()
+        if minValence <= minData:
+            minValence = minData
+        if maxValence >= maxData:
+            maxValence = maxData
+        if minValence >= maxData:
+            minValence = maxData
+        if maxValence <= minData:
+            maxValence = minData
+        if minValence > maxValence:
+            temp = minValence
+            minValence = maxValence
+            maxValence = temp
+        return SongData(self.dataFrame[
+                            (self.dataFrame['valence'] <= maxValence) &
+                            (self.dataFrame['valence'] >= minValence)])
