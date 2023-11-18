@@ -43,3 +43,6 @@ in VM:
 
 VM settings:
 - open ports: 80, 5005
+
+## Presentation
+https://docs.google.com/presentation/d/16MgoQwStPe7EGyCQlpgff1byCMTruNWpmZbztjUzE6Y/edit?usp=sharing
